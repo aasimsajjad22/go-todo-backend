@@ -18,5 +18,11 @@ func init() {
 }
 
 func (t *todoService) Save(todo todo.Todo) (*todo.Todo, *errors.RestErr) {
-	return nil, nil
+	if err := todo.Validate(); err != nil {
+		return nil, err
+	}
+	if err := todo.Save(); err != nil {
+		return nil, err
+	}
+	return &todo, nil
 }

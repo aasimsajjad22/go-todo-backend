@@ -15,6 +15,7 @@ func NewBadRequestError(message string) *RestErr {
 		Error:   "bad_request",
 	}
 }
+
 func NewNotFoundError(message string) *RestErr {
 	return &RestErr{
 		Message: message,
@@ -22,6 +23,7 @@ func NewNotFoundError(message string) *RestErr {
 		Error:   "not_found",
 	}
 }
+
 func NewInternalServerError(message string) *RestErr {
 	return &RestErr{
 		Message: message,
