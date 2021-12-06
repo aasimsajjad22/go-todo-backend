@@ -28,3 +28,7 @@ func (tc *todoController) Create(c *gin.Context) {
 	}
 	c.JSON(http.StatusCreated, result)
 }
+
+func (tc *todoController) GetAll(c *gin.Context) {
+	c.JSON(http.StatusOK, "")
+}
