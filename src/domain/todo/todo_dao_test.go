@@ -86,3 +86,55 @@ func TestTodoSaveNoError(t *testing.T) {
 	assert.Nil(t, saveErr)
 	assert.EqualValues(t, 1, todo.Id)
 }
+
+/**
+TESTCASES FOR GETTING ALL TODOS
+Mocking AllTodo query error case
+*/
+func TestGetAllTodoQueryError(t *testing.T) {
+	db, mock := NewMock()
+	todo := Todo{}
+	defer db.Close()
+	mock.ExpectQuery("SELECT (.*) FROM todo").WillReturnError(errors.New("query error"))
+	todos, getErr := todo.GetAll()
+
+	assert.Nil(t, todos)
+	assert.NotNil(t, getErr)
+	assert.EqualValues(t, "error when trying to get all todos", getErr.Message)
+	assert.EqualValues(t, http.StatusInternalServerError, getErr.Status)
+}
+
+/**
+Mocking getAllTodo result scan error case
+*/
+func TestGetAllTodoResultScanError(t *testing.T) {
+	db, mock := NewMock()
+	todo := Todo{}
+	defer db.Close()
+	rs := sqlmock.NewRows([]string{"id", "description"}).FromCSVString("5")
+	mock.ExpectQuery("SELECT (.*) FROM todo").WillReturnRows(rs)
+	todos, getErr := todo.GetAll()
+
+	assert.Nil(t, todos)
+	assert.NotNil(t, getErr)
+	assert.EqualValues(t, "error when tying to scan todos", getErr.Message)
+	assert.EqualValues(t, http.StatusInternalServerError, getErr.Status)
+}
+
+/**
+Mocking getAllTodo success case
+*/
+func TestGetAllTodoNoError(t *testing.T) {
+	db, mock := NewMock()
+	todo := Todo{}
+	defer db.Close()
+	rs := sqlmock.NewRows([]string{"id", "description"}).FromCSVString("1, Test Todo")
+	mock.ExpectQuery("SELECT (.*) FROM todo").WillReturnRows(rs)
+	todos, getErr := todo.GetAll()
+
+	assert.Nil(t, getErr)
+	assert.NotNil(t, todos)
+	assert.EqualValues(t, 1, len(todos))
+	assert.EqualValues(t, 1, todos[0].Id)
+	assert.EqualValues(t, "Test Todo", todos[0].Description)
+}

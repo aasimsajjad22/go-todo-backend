@@ -7,6 +7,7 @@ import (
 
 const (
 	querySaveTodo = "INSERT INTO todo (`description`) VALUES (?);"
+	queryGetTodos = "SELECT * FROM todo ORDER BY id DESC ;"
 )
 
 func (t *Todo) Save() *errors.RestErr {
@@ -25,4 +26,21 @@ func (t *Todo) Save() *errors.RestErr {
 	}
 	t.Id = todoId
 	return nil
+}
+
+func (t *Todo) GetAll() ([]Todo, *errors.RestErr) {
+	rows, err := todo_db.Client.Query(queryGetTodos)
+	if err != nil {
+		return nil, errors.NewInternalServerError("error when trying to get all todos")
+	}
+	defer rows.Close()
+	todos := make([]Todo, 0)
+	for rows.Next() {
+		var todo Todo
+		if err := rows.Scan(&todo.Id, &todo.Description); err != nil {
+			return nil, errors.NewInternalServerError("error when tying to scan todos")
+		}
+		todos = append(todos, todo)
+	}
+	return todos, nil
 }
