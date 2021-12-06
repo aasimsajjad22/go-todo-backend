@@ -11,6 +11,7 @@ type todoService struct{}
 
 type todoServiceInterface interface {
 	Save(todo.Todo) (*todo.Todo, *errors.RestErr)
+	GetAll() ([]todo.Todo, *errors.RestErr)
 }
 
 func init() {
@@ -25,4 +26,9 @@ func (t *todoService) Save(todo todo.Todo) (*todo.Todo, *errors.RestErr) {
 		return nil, err
 	}
 	return &todo, nil
+}
+
+func (t *todoService) GetAll() ([]todo.Todo, *errors.RestErr) {
+	dao := todo.Todo{}
+	return dao.GetAll()
 }

@@ -30,5 +30,10 @@ func (tc *todoController) Create(c *gin.Context) {
 }
 
 func (tc *todoController) GetAll(c *gin.Context) {
-	c.JSON(http.StatusOK, "")
+	todos, err := services.TodoService.GetAll()
+	if err != nil {
+		c.JSON(err.Status, err)
+		return
+	}
+	c.JSON(http.StatusOK, todos)
 }
