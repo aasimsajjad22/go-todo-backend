@@ -2,6 +2,9 @@
 The backend API has been created with MVC pattern isolating each layer and follow the TDD approach.
 
 ### How to run
+##### - Run through Docker
+- If you have docker installed then update `.env` file with your database credientials and type `docker-compose up` to setup the application in docker environment.
+#### - Run Manually
 - This app uses mod for dependencies, make sure to install **go >= 1.13** and also **mysql** database. <br>
 You can check go version by typing ``` go --version ```on terminal and then download all the dependencies by typing ```go mod download``` this will install all the external libraries used in project. <br>
 - Make sure to add env variables for your mysql credentials.
