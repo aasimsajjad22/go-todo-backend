@@ -5,10 +5,11 @@ WORKDIR $WORKDIR
 
 COPY src/go.mod ./
 COPY src/go.sum ./
+COPY .env ./.env
 
 RUN go mod download
 COPY src $WORKDIR
 
 RUN go build -o go-todo .
-EXPOSE 8080
+EXPOSE 8081
 CMD ["./go-todo"]
