@@ -1,4 +1,4 @@
-## go-todo-backend [![CircleCI](https://circleci.com/gh/circleci/circleci-docs.svg?style=svg)](https://circleci.com/gh/circleci/circleci-docs)
+## go-todo-backend [![CircleCI](https://circleci.com/gh/circleci/circleci-docs.svg?style=svg)](https://app.circleci.com/pipelines/github/aasimsajjad22/go-todo-backend)
 The backend API has been created with MVC pattern isolating each layer and follow the TDD approach.
 
 ### How to run
@@ -17,20 +17,21 @@ You can check go version by typing ``` go --version ```on terminal and then down
 ### Code Coverage
 According to Goland Tool we have 100% code coverage (100% files, 100% statements)
 
-#### Project Structure.
-- [ ] **/app**
+### Project Structure.
+- [ ] **src/app**
   - contains URL mappings and router setup to route our application to controller functions
-- [ ] **/controllers**
+- [ ] **src/controllers**
   - contains todo controller and respective test cases (Integration Tests)
-- [ ] **/datasources**
+- [ ] **src/datasources**
   - contains database configuration, in our case i have used mysql.
-- [ ] **/domain**
+- [ ] **src/domain**
   - core domain for our application, it contains data access and data transfer files and all interaction with database layer also i have added unit testing to test each single line of code. for database i have used Mocking. 
-- [ ] **/services**
+- [ ] **src/services**
   - service layer is actually to perform business logic, validation etc take request from controller perform all business req and return data to controller
-- [ ] **/tests**
+- [ ] **src/tests**
   - contains functional testing where we actually runs the application and perform testing.
-- [ ] **/utils**
+- [ ] **src/utils**
   - support functionality like RestErr which manages rest errors for our API.
  
-
+### Run Tests.
+  - To test simply type ``` go test ./..``` this will run all your test cases, you can also append --cover flag to see coverage as well
