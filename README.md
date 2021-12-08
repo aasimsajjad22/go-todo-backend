@@ -1,5 +1,6 @@
 ## go-todo-backend [![CircleCI](https://circleci.com/gh/circleci/circleci-docs.svg?style=svg)](https://app.circleci.com/pipelines/github/aasimsajjad22/go-todo-backend)
-The backend API has been created with MVC pattern isolating each layer and follow the TDD approach.
+The backend API has been created with MVC pattern isolating each layer and follow the TDD approach.<br>
+You can find frontend application consuming that API here [react-todo-frontend](https://github.com/aasimsajjad22/react-todo-frontend)
 
 ### How to run
 ##### - Run through Docker
